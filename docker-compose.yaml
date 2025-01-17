@@ -1,0 +1,19 @@
+services:
+  backend:
+    depends_on:
+      - psql
+    image: qr_code:1
+    ports:
+      - "8080:8080"
+    environment:
+      - 'SPRING_DATASOURCE_URL=jdbc:postgresql://psql:5432/qr'
+
+  psql:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - 'POSTGRES_PASSWORD=qr'
+      - 'POSTGRES_USER=qr'
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
