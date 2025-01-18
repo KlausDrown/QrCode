@@ -6,14 +6,15 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - 'SPRING_DATASOURCE_URL=jdbc:postgresql://psql:5432/qr'
+      - 'SPRING_DATASOURCE_URL=jdbc:postgresql://psql:5433/qr'
 
   psql:
     image: postgres:alpine
     ports:
-      - "5432:5432"
+      - "5433:5433"
     environment:
       - 'POSTGRES_PASSWORD=qr'
       - 'POSTGRES_USER=qr'
+      - 'PGPORT=5433'
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
